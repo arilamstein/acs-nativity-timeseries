@@ -3,7 +3,7 @@
 This repository contains a small, focused analysis of nativity trends in the United States and in Minneapolis, Minnesota, using the American Community Survey (ACS) 1‑year estimates. The project uses the `censusdis` Python package to pull ACS table **B05012 (Nativity in the United States)** across multiple years and visualize changes over time.
 
 The repo includes:
-- a lightweight plotting module (`graphs.py`)
+- a lightweight plotting module (`plotting.py`)
 - a national‑level notebook (`nation.ipynb`)
 - a Minneapolis‑specific notebook (`minneapolis.ipynb`)
 
