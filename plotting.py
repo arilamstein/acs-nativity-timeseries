@@ -51,3 +51,28 @@ def plot_acs_timeseries(df, column, title="", y_label=None, add_annotations=True
         _add_annotations(fig, df)
 
     return fig
+
+
+def plot_acs_change(
+    df, column, title="", y_label="Population Change", add_annotations=True
+):
+
+    df = df.copy()
+    df[column] = df[column].diff()
+
+    labels = {}
+    if y_label is not None:
+        labels[column] = y_label
+
+    fig = px.bar(
+        df,
+        x="Year",
+        y=column,
+        title=title,
+        labels=labels,
+    )
+
+    if add_annotations:
+        _add_annotations(fig, df)
+
+    return fig
