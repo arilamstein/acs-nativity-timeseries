@@ -3,6 +3,7 @@ import plotly.express as px
 
 def _add_annotations(fig, df):
     administrations = [
+        {"President": "Bush 2", "Start": 2005},
         {"President": "Obama 1", "Start": 2009},
         {"President": "Obama 2", "Start": 2013},
         {"President": "Trump 1", "Start": 2017},
