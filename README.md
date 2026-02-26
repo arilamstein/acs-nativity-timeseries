@@ -1,6 +1,6 @@
 # ACS Nativity Time Series
 
-This repository contains a small, focused analysis of nativity trends in the United States and in Minneapolis, Minnesota, using the American Community Survey (ACS) 1‑year estimates. The project uses the `censusdis` Python package to pull ACS table **B05012 (Nativity in the United States)** across multiple years and visualize changes over time.
+This repository contains a small, focused analysis of nativity trends in the United States and in Minneapolis, Minnesota, using the American Community Survey (ACS) 1‑year estimates.
 
 The repo includes:
 - a lightweight module for ingesting the data (`data.py`)
