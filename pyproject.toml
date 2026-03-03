@@ -23,3 +23,9 @@ dev = [
     "ipykernel>=7.2.0",
     "ruff>=0.15.4",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/getting_started.ipynb" = ["E402"]
+
+[tool.ruff]
+exclude = ["scratch.ipynb"]
