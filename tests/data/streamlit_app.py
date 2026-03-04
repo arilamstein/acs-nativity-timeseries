@@ -28,10 +28,8 @@ column = st.selectbox("Choose a column to visualize", COLUMNS)
 
 col1, col2 = st.columns(2)
 
-with col1:
-    fig1 = plot_nativity_timeseries(df, column=column)
-    st.plotly_chart(fig1)
+fig1 = plot_nativity_timeseries(df, column=column)
+st.plotly_chart(fig1)
 
-with col2:
-    fig2 = plot_nativity_change(df, column=column)
-    st.plotly_chart(fig2)
+fig2 = plot_nativity_change(df, column=column)
+st.plotly_chart(fig2)

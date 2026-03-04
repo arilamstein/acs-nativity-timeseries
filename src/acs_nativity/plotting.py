@@ -1,7 +1,48 @@
 import plotly.express as px
 
 
-def _add_annotations(fig, df):
+def _generate_timeseries_title(df, column):
+
+    allowed = ["Total", "Native", "Foreign-born", "Percent Foreign-born"]
+    if column not in allowed:
+        raise ValueError(f"column must be one of {allowed}")
+
+    if df["Name"].nunique() != 1:
+        raise ValueError(
+            "Automatic titles require a dataframe with a single geography."
+        )
+
+    geo_name = df["Name"].iloc[0]
+
+    if column == "Percent Foreign-born":
+        label = column
+    else:
+        label = f"{column} Population"
+
+    if geo_name == "United States":
+        geo_name = "the United States"
+
+    return f"{label} in {geo_name}"
+
+
+def _generate_change_title(df, column):
+    ts_title = _generate_timeseries_title(df, column)
+    return f"Change in {ts_title}"
+
+
+def _generate_timeseries_y_label(column):
+    if column == "Percent Foreign-born":
+        return "Percent"
+    else:
+        return "Population"
+
+
+def _generate_change_y_label(column):
+    ts_label = _generate_timeseries_y_label(column)
+    return f"Change in {ts_label}"
+
+
+def _add_annotations(fig, df, column):
     administrations = [
         {"President": "Bush 2", "Start": 2005},
         {"President": "Obama 1", "Start": 2009},
@@ -14,7 +55,7 @@ def _add_annotations(fig, df):
     ]
 
     # Add a vertical line on the date the administration started, and write the presdient's name on the top
-    max_y = df["Foreign-born"].max()
+    max_y = df[column].max()
 
     for one_administration in administrations:
         fig.add_vline(
@@ -50,8 +91,15 @@ def _add_source_footer(
 
 
 def plot_nativity_timeseries(
-    df, column, title="", y_label="Population", add_annotations=True, add_source=True
+    df, column, title=None, y_label=None, add_annotations=True, add_source=True
 ):
+    if title is None:
+        title = _generate_timeseries_title(df, column)
+
+    if y_label is None:
+        y_label = _generate_timeseries_y_label(column)
+
+    # Overwrite default names for x- and y-axes
     labels = {"Year": "", column: y_label}
 
     fig = px.line(
@@ -64,7 +112,7 @@ def plot_nativity_timeseries(
     )
 
     if add_annotations:
-        _add_annotations(fig, df)
+        _add_annotations(fig, df, column)
 
     if add_source:
         _add_source_footer(fig)
@@ -75,14 +123,21 @@ def plot_nativity_timeseries(
 def plot_nativity_change(
     df,
     column,
-    title="",
-    y_label="Population Change",
+    title=None,
+    y_label=None,
     add_annotations=True,
     add_source=True,
 ):
     df = df.copy()
     df[column] = df[column].diff()
 
+    if title is None:
+        title = _generate_change_title(df, column)
+
+    if y_label is None:
+        y_label = _generate_change_y_label(column)
+
+    # Overwrite default names for x- and y-axes
     labels = {"Year": "", column: y_label}
 
     fig = px.bar(
@@ -94,7 +149,7 @@ def plot_nativity_change(
     )
 
     if add_annotations:
-        _add_annotations(fig, df)
+        _add_annotations(fig, df, column)
 
     if add_source:
         _add_source_footer(fig)
