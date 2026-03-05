@@ -1,14 +1,10 @@
 # acs-nativity
 
-`acs-nativity` is a Python package for analyzing immigration trends from the American Community Survey (ACS) as a time series. It provides a simple interface for downloading and visualizing data on the native and foreign-born population.
+`acs-nativity` is a Python package for analyzing immigration trends in the United States using data from the American Community Survey (ACS). It provides a simple interface for downloading and visualizing data on the native and foreign-born population.
 
-A key feature of the package is that it returns the data as a historical time series covering the full span of ACS 1-year estimates (2005-2024). Under the hood, the package harmonizes two ACS tables - `B05002` (2005-2008) and `B05012` (2009 onward) - so users receive a single consistent dataset covering the entire period. The Census Bureau did not release ACS 1-year estimates in 2020, so that year is not in the series. The 2025 ACS 1-year estimates are expected to be released in September 2026.
+The package provides data as time series covering the full span of ACS 1-year estimates (2005-2024). Under the hood, the package harmonizes two ACS tables: `B05002` (2005-2008) and `B05012` (2009 onward). The 2025 ACS 1-year estimates are expected to be released in September 2026. The Census Bureau did not release ACS 1-year estimates in 2020. 
 
-The ACS 1-year estimates are available for many geographies across the United States. As the Census Bureau explains:
-
-> The ACS 1-year estimates are available for the nation, all states, the District of Columbia, Puerto Rico, all congressional districts and metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
-
-`acs-nativity` makes it easy to work with data for any geography supported by the ACS 1-year estimates.
+`acs-nativity` makes it easy to work with data for any geography supported by the ACS 1-year estimates. This includes the nation, all states, the District of Columbia, Puerto Rico, all congressional districts and metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
 
 The package exposes three functions:
 
@@ -49,7 +45,7 @@ To plot a time series of the dataframe, call `plot_nativity_timeseries` and spec
 plot_nativity_timeseries(df, column="Foreign-born")
 ```
  ![Foreign-Born Population](images/nativity_us.png)
-The foreign-born population has increased steadily since 2005, with a particularly large increase during the Biden administration.
+This graph shows that the foreign-born population has increased steadily since 2005, with a particularly large increase during the Biden administration.
 
 Sometimes it is helpful to show the year-over-year changes instead of raw values. To do that, call `plot_nativity_change` with a dataframe and a column: 
 ```python
@@ -58,8 +54,31 @@ plot_nativity_change(df, column="Foreign-born")
 
 ![Year-over-Year Change](images/nativity_us_diff.png)
 
-Here we can see that the only year when the foreign-born population decreased was 2008.
+This chart makes it clear that the only year when the foreign-born population decreased was 2008.
 
-## Learning More
+## Choosing a Geography
 
-To learn more about how to use `acs-nativity`, including how to work with other geographies (such as states, counties, and cities), see the [Getting Started Notebook](notebooks/getting_started.ipynb).
+`get_nativity_timeseries` can provide data for the same geographies supported by the ACS 1-year estimates: the nation, all states, the District of Columbia, Puerto Rico, all congressional districts and metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
+
+To specify a geography, `acs-nativity` follows the same conventions as the `censusdis` package, which provides convenient constants for identifying Census geographies.
+
+A geography is specified using a keyword argument where:
+
+  * the keyword identifies the geography type (such as `state`)
+  * the value is a constant imported from a censusdis module (such as `censusdis.states`)
+
+Installing `acs-nativity` automatically installs `censusdis`, so these constants are available once the package is installed.
+
+Below are examples for several common geographies.
+
+| Geography | Module | Example |
+|---|---|---|
+| United States | — | `df = get_nativity_timeseries(us="*")` |
+| State | `censusdis.states` | `from censusdis.states import MN`<br>`df = get_nativity_timeseries(state=MN)` |
+| County | `censusdis.counties.<state_name>` | `from censusdis.states import NY`<br>`from censusdis.counties.new_york import NASSAU`<br>`df = get_nativity_timeseries(state=NY, county=NASSAU)` |
+| City | `censusdis.places.<state_name>` | `from censusdis.states import IL`<br>`from censusdis.places.illinois import CHICAGO_CITY`<br>`df = get_nativity_timeseries(state=IL, place=CHICAGO_CITY)` |
+| Metropolitan Statistical Area (MSA)| `censusdis.msa_msa` | `from censusdis.msa_msa import DENVER_AURORA_LAKEWOOD_CO_METRO_AREA`<br>`df = get_nativity_timeseries(metropolitan_statistical_area_micropolitan_statistical_area=DENVER_AURORA_LAKEWOOD_CO_METRO_AREA)` |
+
+
+
+You can learn more in the [Additional Geographies](https://censusdis.readthedocs.io/en/stable/intro.html#additional-geographies) section of the `censusdis` documentation. 
