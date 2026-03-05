@@ -4,7 +4,7 @@
 
 The package provides data as a time series covering the full span of ACS 1-year estimates (2005-2024). Under the hood, the package harmonizes two ACS tables: `B05002` (2005-2008) and `B05012` (2009 onward). The 2025 ACS 1-year estimates are expected to be released in September 2026. The Census Bureau did not release ACS 1-year estimates in 2020. 
 
-`acs-nativity` makes it easy to work with data for any geography supported by the ACS 1-year estimates. This includes the nation, all states, the District of Columbia, Puerto Rico, all congressional districts and metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
+`acs-nativity` makes it easy to work with data for several geographies covered by the ACS 1-year estimates. This includes the nation, all states, the District of Columbia, all metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
 
 The package exposes three functions:
 
@@ -58,14 +58,14 @@ This chart makes it clear that the only year when the foreign-born population de
 
 ## Choosing a Geography
 
-`get_nativity_timeseries` can provide data for the same geographies supported by the ACS 1-year estimates: the nation, all states, the District of Columbia, Puerto Rico, all congressional districts and metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
+`get_nativity_timeseries` can provide data for several geographies covered by the ACS 1-year estimates. This includes the nation, all states, the District of Columbia, all metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
 
 To specify a geography, `acs-nativity` follows the same conventions as the `censusdis` package, which provides convenient constants for identifying Census geographies.
 
 A geography is specified using a keyword argument where:
 
   * the keyword identifies the geography type (such as `state`)
-  * the value is a constant imported from a censusdis module (such as `censusdis.states`)
+  * the value is a constant imported from a `censusdis` module (such as `censusdis.states`)
 
 Installing `acs-nativity` automatically installs `censusdis`, so these constants are available once the package is installed.
 
