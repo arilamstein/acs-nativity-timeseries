@@ -1,3 +1,8 @@
+"""
+Streamlit app used for manually testing title and label generation in the
+plotting functions across different columns and geographies.
+"""
+
 import pandas as pd
 import streamlit as st
 

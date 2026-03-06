@@ -1,3 +1,10 @@
+"""
+Public API for the acs_nativity package.
+
+Provides functions for downloading ACS 1-year nativity data across years and
+utilities for visualizing nativity levels and changes over time.
+"""
+
 from importlib.metadata import version
 
 from .data import get_nativity_timeseries

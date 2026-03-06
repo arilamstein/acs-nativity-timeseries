@@ -1,3 +1,9 @@
+"""
+Plotting functions for visualizing ACS nativity data, including time‑series
+levels and year‑over‑year changes, with optional annotations and consistent
+styling for use across analyses.
+"""
+
 import plotly.express as px
 import pandas as pd
 from typing import Any
@@ -100,6 +106,42 @@ def plot_nativity_timeseries(
     add_annotations: bool = True,
     add_source: bool = True,
 ) -> Any:
+    """
+    Plot a nativity time series for a selected column using Plotly.
+
+    This function creates a line chart showing the values of a specified
+    nativity-related column across years. It supports optional annotations
+    marking the start of presidential administrations and can append a standard
+    ACS data source note to the figure. The function returns a Plotly figure
+    object, allowing callers to further customize or display it.
+
+    Args:
+        df: A DataFrame containing a nativity time series, typically produced by
+            `get_nativity_timeseries`.
+        column: The column in `df` to plot (e.g., "Foreign-born",
+            "Percent Foreign-born").
+        title: Optional title for the chart. If omitted, a title is generated
+            automatically.
+        y_label: Optional label for the y-axis. If omitted, a label is generated
+            automatically.
+        add_annotations: Whether to add vertical dashed lines marking the start
+            of presidential administrations.
+        add_source: Whether to append a standard ACS source note.
+
+    Returns:
+        A Plotly figure visualizing the selected nativity time series.
+
+    Examples:
+        Plot the nationwide foreign-born population:
+            df = get_nativity_timeseries(us="*")
+            fig = plot_nativity_timeseries(df, "Foreign-born")
+            fig.show()
+
+        Plot the nationwide percent foreign-born:
+            df = get_nativity_timeseries(us="*")
+            fig = plot_nativity_timeseries(df, "Percent Foreign-born")
+            fig.show()
+    """
     if title is None:
         title = _generate_timeseries_title(df, column)
 
@@ -135,6 +177,44 @@ def plot_nativity_change(
     add_annotations: bool = True,
     add_source: bool = True,
 ) -> Any:
+    """
+    Plot year-over-year change for a selected nativity column using Plotly.
+
+    This function computes and visualizes the annual change in a specified
+    nativity-related column. It supports optional annotations marking the start
+    of presidential administrations and can append a standard ACS data source
+    note to the figure. The function returns a Plotly figure object, allowing
+    callers to further customize or display it.
+
+    Args:
+        df: A DataFrame containing a nativity time series, typically produced by
+            `get_nativity_timeseries`.
+        column: The column in `df` for which to compute and plot year-over-year
+            change (e.g., "Foreign-born", "Percent Foreign-born").
+        title: Optional title for the chart. If omitted, a title is generated
+            automatically.
+        y_label: Optional label for the y-axis. If omitted, a label is generated
+            automatically.
+        add_annotations: Whether to add vertical dashed lines marking the start
+            of presidential administrations.
+        add_source: Whether to append a standard ACS source note.
+
+    Returns:
+        A Plotly figure visualizing the year-over-year change in the selected
+        nativity column.
+
+    Examples:
+        Plot the nationwide year-over-year change in the foreign-born population:
+            df = get_nativity_timeseries(us="*")
+            fig = plot_nativity_change(df, "Foreign-born")
+            fig.show()
+
+        Plot the nationwide year-over-year change in percent foreign-born:
+            df = get_nativity_timeseries(us="*")
+            fig = plot_nativity_change(df, "Percent Foreign-born")
+            fig.show()
+    """
+
     df = df.copy()
     df[column] = df[column].diff()
 

@@ -23,7 +23,11 @@ pip install git+https://github.com/arilamstein/acs-nativity.git
 
 ## Example Workflow
 
-The code below will get nativity data for the entire country:
+The example below walks you through getting historic nativity data for the entire country, graphing it as a time series, and graphing the year-over-year changes.
+
+### Getting Data
+
+The code below will get nativity data for the entire country over the course of the entire ACS (2005-2024):
 ```python
 from acs_nativity import (
     get_nativity_timeseries,
@@ -40,15 +44,22 @@ df.head(1)
 ```
 The parameter `us="*"` tells `get_nativity_timeseries` to return data for the entire country. The key columns are `Total`, `Native`, `Foreign-born`, and `Percent Foreign-born`. Those columns are provided for all geographies.
 
+### Graphing Time Series
+
 To plot a time series of the dataframe, call `plot_nativity_timeseries` and specify the column you want to chart. Most chart details (e.g., title and axis labels) are handled automatically, and annotations show when presidential administrations changed.
 
 ```python
 plot_nativity_timeseries(df, column="Foreign-born")
 ```
+
  ![Foreign-Born Population](images/nativity_us.png)
+
 This graph shows that the foreign-born population has increased steadily since 2005, with a particularly large increase during the Biden administration.
 
+### Graphing Year-over-Year Change
+
 Sometimes it is helpful to show the year-over-year changes instead of raw values. To do that, call `plot_nativity_change` with a dataframe and a column: 
+
 ```python
 plot_nativity_change(df, column="Foreign-born")
 ```

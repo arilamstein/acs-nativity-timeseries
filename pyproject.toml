@@ -27,6 +27,19 @@ dev = [
     "streamlit>=1.55.0",
 ]
 
+[tool.ruff.lint]
+select = ["D"]  # enable pydocstyle family
+ignore = [
+    "D203",  # incompatible with Google style
+    "D212",  # incompatible with Google style
+    "D213",  # incompatible with Google style
+    "D402",  # no need to match function name in docstring
+    "D401",  # imperative mood is too strict
+    "D205",  # blank-line rules too strict
+    "D202",  # blank-line rules too strict
+    "D413",  # blank-line rules too strict
+]
+
 [tool.ruff.lint.per-file-ignores]
 "notebooks/getting_started.ipynb" = ["E402"]
 

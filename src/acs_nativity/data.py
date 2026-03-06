@@ -1,3 +1,8 @@
+"""
+Functions for downloading, normalizing, and assembling ACS 1-year nativity data
+into a consistent time series suitable for analysis and visualization.
+"""
+
 from censusdis.multiyear import download_multiyear
 from censusdis.datasets import ACS1
 import pandas as pd
@@ -18,6 +23,54 @@ def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def get_nativity_timeseries(**kwargs: Any) -> pd.DataFrame:
+    """
+    Retrieve a continuous ACS 1-year nativity time series from 2005–2024.
+
+    This function stitches together ACS table B05002 (used from 2005–2008) and
+    ACS table B05012 (used from 2009–2024, excluding 2020 when no 1-year ACS
+    was released) into a single, normalized DataFrame. It also adds a derived
+    column, "Percent Foreign-born", for convenience.
+
+    Additional keyword arguments are passed directly to
+    `censusdis.download_multiyear`, allowing callers to specify geography or
+    other censusdis options. Supported geography patterns mirror those in the
+    censusdis documentation.
+
+    Args:
+        **kwargs: Keyword arguments forwarded to `download_multiyear`, typically
+            specifying geography or other censusdis parameters.
+
+    Returns:
+        pd.DataFrame: A DataFrame with nativity counts for each year, including
+        "Total", "Native", "Foreign-born", and the derived
+        "Percent Foreign-born".
+
+    Examples:
+        Nationwide:
+            df = get_nativity_timeseries(us="*")
+
+        State:
+            from censusdis.states import MN
+            df = get_nativity_timeseries(state=MN)
+
+        County:
+            from censusdis.states import NY
+            from censusdis.counties.new_york import NASSAU
+            df = get_nativity_timeseries(state=NY, county=NASSAU)
+
+        City:
+            from censusdis.states import IL
+            from censusdis.places.illinois import CHICAGO_CITY
+            df = get_nativity_timeseries(state=IL, place=CHICAGO_CITY)
+
+        Metropolitan Statistical Area (MSA):
+            from censusdis.msa_msa import EL_PASO_TX_METRO_AREA
+            df = get_nativity_timeseries(
+                metropolitan_statistical_area_micropolitan_statistical_area=
+                    EL_PASO_TX_METRO_AREA
+            )
+    """
+
     # From 2005-8 the data we want is in table B05002
     df1 = download_multiyear(
         dataset=ACS1,
