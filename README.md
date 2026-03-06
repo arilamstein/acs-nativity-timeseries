@@ -89,12 +89,16 @@ Installing `acs-nativity` automatically installs `censusdis`, so these constants
 
 Below are examples for several common geographies.
 
-| Geography | Module | Example |
-|---|---|---|
-| United States | — | `df = get_nativity_timeseries(us="*")` |
-| State | `censusdis.states` | `from censusdis.states import MN`<br>`df = get_nativity_timeseries(state=MN)` |
-| County | `censusdis.counties.<state_name>` | `from censusdis.states import NY`<br>`from censusdis.counties.new_york import NASSAU`<br>`df = get_nativity_timeseries(state=NY, county=NASSAU)` |
-| City | `censusdis.places.<state_name>` | `from censusdis.states import IL`<br>`from censusdis.places.illinois import CHICAGO_CITY`<br>`df = get_nativity_timeseries(state=IL, place=CHICAGO_CITY)` |
-| Metropolitan Statistical Area (MSA) | `censusdis.msa_msa` | `from censusdis.msa_msa import EL_PASO_TX_METRO_AREA`<br>`df = get_nativity_timeseries(` <br>`    metropolitan_statistical_area_micropolitan_statistical_area=`<br>`    EL_PASO_TX_METRO_AREA`<br>`)` |
+| Geography | Keyword | Module for Value | Example |
+|---|---|---|---|
+| United States | `us` | — | `df = get_nativity_timeseries(us="*")` |
+| State | `state` | `censusdis.states` | `from censusdis.states import MN`<br>`df = get_nativity_timeseries(state=MN)` |
+| County | `county` | `censusdis.counties.<state_name>` | `from censusdis.states import NY`<br>`from censusdis.counties.new_york import NASSAU`<br>`df = get_nativity_timeseries(state=NY, county=NASSAU)` |
+| City | `place` | `censusdis.places.<state_name>` | `from censusdis.states import IL`<br>`from censusdis.places.illinois import CHICAGO_CITY`<br>`df = get_nativity_timeseries(state=IL, place=CHICAGO_CITY)` |
+| Metropolitan Statistical Area (MSA) | *(see note below)* | `censusdis.msa_msa` | `from censusdis.msa_msa import EL_PASO_TX_METRO_AREA`<br>`df = get_nativity_timeseries(` <br>`    metropolitan_statistical_area_micropolitan_statistical_area=`<br>`    EL_PASO_TX_METRO_AREA`<br>`)` |
+
+**Note:** The keyword for MSAs is
+`metropolitan_statistical_area_micropolitan_statistical_area`,
+which is too long to display cleanly inside the table. It is still the correct keyword to use when calling `get_nativity_timeseries`.
 
 You can learn more in the [Additional Geographies](https://censusdis.readthedocs.io/en/stable/intro.html#additional-geographies) section of the `censusdis` documentation. 
