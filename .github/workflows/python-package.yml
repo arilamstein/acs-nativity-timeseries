@@ -38,4 +38,4 @@ jobs:
         run: uv run mypy .
 
       - name: Run tests
-        run: uv run pytest
+        run: uv run pytest --cov=acs_nativity --cov-report=term-missing

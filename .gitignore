@@ -12,3 +12,6 @@ wheels/
 TODO
 scratch.ipynb
 .vscode/
+
+.coverage
+htmlcov/
