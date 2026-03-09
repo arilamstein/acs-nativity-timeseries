@@ -12,10 +12,17 @@ from typing import Any
 def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     """
     The earlier table (B05002) has columns that are not present in the newer
-    table (B05012). The newer table also hyphenates "Foreign-born".
+    table (B05012). Over the years ACS has been inconsistent in usage of
+    hyphens and capitalization for "Foreign-born as well.
     Normalize column names so the tables can be concatenated.
     """
-    df = df.rename(columns={"Foreign born": "Foreign-born", "NAME": "Name"})
+    df = df.rename(
+        columns={
+            "Foreign born": "Foreign-born",
+            "Foreign-Born": "Foreign-born",
+            "NAME": "Name",
+        }
+    )
 
     df = df[["Name", "Year", "Total", "Native", "Foreign-born"]]
 
