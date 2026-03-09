@@ -44,6 +44,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "notebooks/getting_started.ipynb" = ["E402"]
+"tests/*.py" = ["D"]
 
 [tool.ruff]
 exclude = ["scratch.ipynb"]
