@@ -56,3 +56,8 @@ warn_return_any = true
 no_implicit_optional = true
 exclude = "tests/.*"
 
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:The 'shapely.geos' module is deprecated"
+]
+
