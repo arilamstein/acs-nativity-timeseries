@@ -1,5 +1,6 @@
 # acs-nativity
 [![CI](https://github.com/arilamstein/acs-nativity/actions/workflows/python-package.yml/badge.svg?branch=main&event=push)](https://github.com/arilamstein/acs-nativity/actions/workflows/python-package.yml)
+[![Coverage](https://codecov.io/gh/arilamstein/acs-nativity/branch/main/graph/badge.svg)](https://codecov.io/gh/arilamstein/acs-nativity)
 
 `acs-nativity` is a Python package for analyzing immigration trends in the United States using data from the American Community Survey (ACS). It provides a simple interface for downloading and visualizing data on the native-born and foreign-born population.
 
