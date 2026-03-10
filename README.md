@@ -4,7 +4,7 @@
 
 `acs-nativity` is a Python package for analyzing immigration trends in the United States using data from the American Community Survey (ACS). It provides a simple interface for downloading and visualizing data on the native-born and foreign-born population.
 
-The package provides data as a time series covering the full span of ACS 1-year estimates (2005-2024). Under the hood, the package harmonizes two ACS tables: `B05002` (2005-2008) and `B05012` (2009 onward). The 2025 ACS 1-year estimates are expected to be released in September 2026. The Census Bureau did not release ACS 1-year estimates in 2020. 
+The package provides data as a time series covering the full span of ACS 1-year estimates (2005-2024). Under the hood, the package downloads and harmonizes two ACS tables: `B05002` (2005-2008) and `B05012` (2009 onward). The 2025 ACS 1-year estimates are expected to be released in September 2026. The Census Bureau did not release ACS 1-year estimates in 2020. 
 
 `acs-nativity` makes it easy to work with data for several geographies covered by the ACS 1-year estimates. This includes the nation, all states, the District of Columbia, all metropolitan statistical areas, and all counties and places (i.e., towns or cities) with populations of 65,000 or more.
 
@@ -103,3 +103,18 @@ Below are examples for several common geographies.
 which is too long to display cleanly inside the table.
 
 You can learn more in the [Additional Geographies](https://censusdis.readthedocs.io/en/stable/intro.html#additional-geographies) section of the `censusdis` documentation. 
+
+## Getting with the Latest Data
+
+By default, `get_nativity_timeseries()` returns data for 2005–2024. These years were chosen because:
+
+  * 2005 is the first year of ACS 1‑year estimates
+  * 2024 is the most recent year available at the time this package was published
+
+The Census Bureau is expected to release the 2025 ACS 1‑year estimates in July 2026. When that happens, you can retrieve the new data immediately—without updating the package—by setting `end_year=2025`. For example:
+
+```python
+df = get_nativity_timeseries(end_year=2025, us="*")
+```
+
+This works because the package downloads data dynamically from the Census API; it does not store any data internally.
