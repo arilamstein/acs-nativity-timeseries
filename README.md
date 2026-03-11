@@ -16,10 +16,10 @@ The package exposes three functions:
 
 ## Installation
 
-Install directly from GitHub:
+Install `acs-nativity` with `pip`:
 
 ```sh
-pip install git+https://github.com/arilamstein/acs-nativity.git
+pip install acs-nativity
 ```
 
 ## Example Workflow
@@ -56,7 +56,7 @@ fig.show()
 
 **Note:** In Jupyter notebooks, you can simply call `plot_nativity_timeseries(df, column="Foreign-born")` as the last line of a cell and the figure will render automatically. In a Python REPL or script, assign the figure to a variable and call `.show()`.
 
- ![Foreign-Born Population](images/nativity_us.png)
+![Foreign-Born Population](https://github.com/arilamstein/acs-nativity/blob/v0.1.0/images/nativity_us.png?raw=true)
 
 This graph shows that the foreign-born population has increased steadily since 2005, with a particularly large increase during the Biden administration.
 
@@ -71,7 +71,7 @@ fig.show()
 
 **Note:** In Jupyter notebooks, you can simply call `plot_nativity_change(df, column="Foreign-born")` as the last line of a cell and the figure will render automatically. In a Python REPL or script, assign the figure to a variable and call `.show()`.
 
-![Year-over-Year Change](images/nativity_us_diff.png)
+![Year-over-Year Change](https://github.com/arilamstein/acs-nativity/blob/v0.1.0/images/nativity_us_diff.png?raw=true)
 
 This chart makes it clear that the only year when the foreign-born population decreased was 2008.
 
