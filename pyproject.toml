@@ -1,6 +1,6 @@
 [project]
 name = "acs-nativity"
-version = "0.1.1"
+version = "0.1.2"
 description = "Tools for accessing and visualizing historical ACS 1-Year nativity data for the United States and subnational geographies."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -80,3 +80,6 @@ filterwarnings = [
 [project.urls]
 Homepage = "https://github.com/arilamstein/acs-nativity"
 Issues = "https://github.com/arilamstein/acs-nativity/issues"
+
+[tool.uv_build]
+include = ["acs_nativity/py.typed"]
